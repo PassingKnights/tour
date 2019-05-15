@@ -33,6 +33,11 @@
 	
 	<bean id="factory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property value="classpath:mybatis-main.xml" name="configLocation"/>
+		<property name="dataSource" ref="dataSource"/>
+		<!--指定mybatis，mapper文件的位置 -->
+		<property value="classpath:mapper/*.xml" name="mapperLocations"/>
+
 	</bean>
 	<!--扫描接口被spring管理-->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -47,7 +52,6 @@
 	<!--配置声明式事务 -->
 	<tx:advice id="txAdvice"
 		transaction-manager="transactionManager">
-
 	</tx:advice>
 	<!--绑定切点和给切点添加事务 -->
 	<aop:config>
